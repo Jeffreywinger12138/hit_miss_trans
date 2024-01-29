@@ -38,7 +38,7 @@ function filtered_image = custom_median_filter(image)
     filtered_image = zeros(rows, cols);
     
     % Pad the image array with zeros on all sides
-    padded_image = padarray(image, [1, 1], 0, 'both');
+    padded_image =  custom_padarray(image, [1, 1], 0, 'both');
     
     % Perform median filtering
     for i = 2 : (rows + 1)
@@ -47,7 +47,7 @@ function filtered_image = custom_median_filter(image)
             window = padded_image(i-1:i+1, j-1:j+1);
             
             % Find the median of the neighborhood
-            median_value = median(window(:));
+            median_value = custom_median(window(:));
             
             % Assign the median value to the filtered image
             filtered_image(i-1, j-1) = median_value;

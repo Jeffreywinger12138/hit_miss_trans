@@ -50,7 +50,6 @@ image = imread('RandomDisks-P10.jpg');
 gray_image = rgb2gray(image);
 
 % Apply a threshold to convert the image to binary
-% You can choose the threshold value or use graythresh function to do it automatically
 threshold_value = graythresh(gray_image); % Otsu's method to find optimal threshold
 binary_image = imbinarize(gray_image, threshold_value);
 
@@ -59,19 +58,16 @@ binary_image = imbinarize(gray_image, threshold_value);
 % figure, imshow(gray_image), title('Grayscale Image');
 % figure, imshow(binary_image), title('Binary Image');
 
-% If there is salt-and-pepper noise, you may want to apply median filtering
-filtered_image = custom_median_filter(binary_image); % 3x3 is a commonly used kernel size
+filtered_image = custom_median_filter(binary_image); % 3x3 kernel size
 
 % Usage:
-% Assume binary_image is your filtered binary image
 % Define size_of_disks as the radius for structuring elements A and B
-size_of_disks = [3, 35];
-hit_or_miss_result = hit_or_miss_transform2(~filtered_image);
+hit_or_miss_result = hit_or_miss_transform(~filtered_image);
 
 % Display the result
 imshow(hit_or_miss_result);
 
 figure, imshow(~filtered_image), title('Filtered Binary Image');
 
-figure, imshow(~filtered_image), title('Filtered Binary Image');
+figure, imshow(~filtered_image-hit_or_miss_result), title('Result Image');
 %%%%%%%%%%%%% End of the main.m file %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
