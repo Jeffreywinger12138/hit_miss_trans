@@ -50,8 +50,23 @@ image = imread('RandomDisks-P10.jpg');
 gray_image = rgb2gray(image);
 
 % Apply a threshold to convert the image to binary
-threshold_value = graythresh(gray_image); % Otsu's method to find optimal threshold
-binary_image = imbinarize(gray_image, threshold_value);
+% threshold_value = graythresh(gray_image); % Otsu's method to find optimal threshold
+% binary_image = imbinarize(gray_image, 130);
+
+[rows, cols] = size(gray_image);
+
+% Make empty image
+binary_image = zeros(rows, cols, 'logical');
+
+for i = 1:rows
+    for j = 1:cols
+        if gray_image(i,j) > 130
+            binary_image(i,j) = true;
+        else 
+            binary_image(i,j) = false;
+        end
+    end
+end
 
 % % Display the images
 % figure, imshow(image), title('Original Image');
